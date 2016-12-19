@@ -19,8 +19,6 @@ class ViewController: UIViewController, SearchAndSelectDelegate {
 		super.viewDidLoad()
 		view.addSubnode(searchAndSelect)
 		searchAndSelect.delegate = self
-		searchAndSelect.layer.borderWidth = 1.0
-		searchAndSelect.layer.borderColor = UIColor.red.cgColor
 		
 		searchAndSelect.tableNode.reloadData()
 		
@@ -28,7 +26,8 @@ class ViewController: UIViewController, SearchAndSelectDelegate {
 	}
 
 	func didSelectSuggestion(atIndexPath indexPath: IndexPath) {
-		searchAndSelect.textField.attributedText = NSAttributedString(string: suggestions[indexPath.row])
+		searchAndSelect.textField.textNode.attributedText = NSAttributedString(string: suggestions[indexPath.row], attributes: TextStyles.shared.bodyStyle)
+		self.searchAndSelect.textField.searchTextState = .closed
 		self.searchAndSelect.state = .closed
 		self.searchAndSelect.transitionLayout(withAnimation: true, shouldMeasureAsync: true, measurementCompletion: nil)
 	}
@@ -61,7 +60,7 @@ class ViewController: UIViewController, SearchAndSelectDelegate {
 	}
 	
 	override func viewDidLayoutSubviews() {
-		searchAndSelect.frame = CGRect(x: view.frame.width/4, y: view.frame.height/4, width: view.frame.width/2, height: view.frame.height/2)
+		searchAndSelect.frame = CGRect(origin: .zero, size: view.frame.size)
 	}
 }
 

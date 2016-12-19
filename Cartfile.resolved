@@ -1,3 +1,3 @@
 github "pinterest/PINCache" "3.0.1-beta.2"
 github "pinterest/PINRemoteImage" "3.0.0-beta.6"
-github "hartbit/AsyncDisplayKit" "fcf6f4377eb329221453ac671a35d2ce3512e431"
+github "facebook/AsyncDisplayKit" "c0ae709b88a0fcdaaebbecc118a5b87564c2ab06"

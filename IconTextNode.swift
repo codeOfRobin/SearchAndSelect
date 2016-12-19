@@ -8,53 +8,90 @@
 
 import AsyncDisplayKit
 
-enum searchState {
-	
+public enum SearchTextState {
+	case closed
+	case open
+	case searching
 }
 
 open class IconTextNode: ASDisplayNode, ASEditableTextNodeDelegate {
 	
-	var icon = ASImageNode()
-	let textNode = ASEditableTextNode()
+	public let icon = ASImageNode()
+	public let textNode = ASEditableTextNode()
+	let container = ASDisplayNode()
+	let bottomSeparator = ASDisplayNode()
+	let topSeparator = ASDisplayNode()
+	
+	public var searchTextState: SearchTextState = .closed {
+		didSet {
+			if searchTextState == .searching {
+				(indicator.view as? UIActivityIndicatorView).flatMap{
+					$0.startAnimating()
+				}
+			} else {
+				(indicator.view as? UIActivityIndicatorView).flatMap{
+					$0.stopAnimating()
+				}
+			}
+			self.transitionLayout(withAnimation: true, shouldMeasureAsync: true, measurementCompletion: nil)
+			
+		}
+	}
+	
+	let indicator = ASDisplayNode { () -> UIView in
+		let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+		indicator.hidesWhenStopped = true
+		return indicator
+	}
 	
 	public override init() {
 		super.init()
+		
+		self.automaticallyManagesSubnodes = true
 		icon.image = #imageLiteral(resourceName: "search")
 		addSubnode(icon)
 		addSubnode(textNode)
+		addSubnode(topSeparator)
+		addSubnode(bottomSeparator)
 		textNode.delegate = self
-		textNode.attributedPlaceholderText = NSAttributedString(string: "Really long ksdaNIUadsiusdahiudsahsadhuIUasduisdaUIHASDIUHdasuiuihasd")
-	}
-	
-	public func editableTextNodeDidUpdateText(_ editableTextNode: ASEditableTextNode) {
-		self.invalidateCalculatedLayout()
-		self.setNeedsLayout()
-	}
-	
-//	open override func calculateSizeThatFits(_ constrainedSize: CGSize) -> CGSize {
-//		let imageSize = icon.layoutThatFits(ASSizeRangeMake(CGSize.zero, constrainedSize)).size
-//		let maxTextSize = CGSize(width: constrainedSize.width - imageSize.width, height: constrainedSize.height)
-//		let textSize = textNode.layoutThatFits(ASSizeRangeMake(CGSize.zero, maxTextSize)).size
-//		
-//		let minHeight = max(imageSize.height, textSize.height)
-//		return CGSize(width: constrainedSize.width, height: minHeight)
-//	}
-//	
-//	
-//	open override func layout() {
-//		let imageSize = icon.calculatedSize
-//		icon.frame = CGRect(x: bounds.size.width - imageSize.width, y: 0.0, width: imageSize.width, height: imageSize.height)
-//		
-//		let textSize = textNode.calculatedSize
-//		textNode.frame = CGRect(origin: .zero, size: textSize)
-//	}
-	
-	open override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		textNode.style.flexShrink = 1.0
+		
+		self.backgroundColor = Colors.shared.searchBackground
+		textNode.attributedPlaceholderText = NSAttributedString(string: "Previous Value", attributes: TextStyles.shared.placeholderStyle)
+		textNode.typingAttributes = TextStyles.shared.bodyStyle
+		
+		topSeparator.backgroundColor = Colors.shared.separatorColor
+		bottomSeparator.backgroundColor = Colors.shared.separatorColor
+		
 		icon.style.height = ASDimensionMake(20.0)
 		icon.style.width = ASDimensionMake(20.0)
+		indicator.style.height = ASDimensionMake(20.0)
+		indicator.style.width = ASDimensionMake(20.0)
 		
+		topSeparator.style.height = ASDimensionMake(1.0)
+		bottomSeparator.style.height = ASDimensionMake(1.0)
 		
-		return ASStackLayoutSpec(direction: .horizontal, spacing: 13.0, justifyContent: .spaceBetween, alignItems: .stretch, children: [textNode, icon])
 	}
+
+	
+	open override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+		textNode.style.flexGrow = 1.0
+		topSeparator.style.flexGrow = 1.0
+		bottomSeparator.style.flexGrow = 1.0
+		
+		var children: [ASLayoutElement] = []
+		
+		switch searchTextState {
+		case .closed:
+			children = [textNode]
+		case .open:
+			children = [icon, textNode]
+		case .searching:
+			children = [indicator, textNode]
+		}
+		
+		let insetted = ASInsetLayoutSpec(insets: UIEdgeInsetsMake(15, 15, 15, 15), child: ASStackLayoutSpec(direction: .horizontal, spacing: 13.0, justifyContent: .start, alignItems: .stretch, children: children))
+		
+		return ASStackLayoutSpec(direction: .vertical, spacing: 0.0, justifyContent: .center, alignItems: .stretch, children: [topSeparator, insetted, bottomSeparator])
+	}
+	
 }

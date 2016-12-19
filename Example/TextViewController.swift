@@ -15,17 +15,24 @@ class TextViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		view.addSubnode(node)
-//		node.backgroundColor = UIColor.red
 		let searchText = IconTextNode()
 		node.addSubnode(searchText)
-//		searchText.backgroundColor = UIColor.green
 		searchText.layout()
 		node.layoutSpecBlock = {
 			size in
-			searchText.style.maxWidth = ASDimensionMake("100%")
-			return ASCenterLayoutSpec(centeringOptions: .XY, sizingOptions: [], child: searchText)
+			return ASStackLayoutSpec(direction: .vertical, spacing: 0.0, justifyContent: .center, alignItems: .stretch, children: [searchText])
 		}
 		
+//		let first = DispatchTime.now() + .seconds(3)
+//		let second = DispatchTime.now() + .seconds(10)
+//		
+//		DispatchQueue.main.asyncAfter(deadline: first) { 
+//			searchText.searchTextState = .open
+//		}
+//		
+//		DispatchQueue.main.asyncAfter(deadline: second) {
+//			searchText.searchTextState = .searching
+//		}
         // Do any additional setup after loading the view.
     }
 

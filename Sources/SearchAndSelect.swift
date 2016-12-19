@@ -25,7 +25,7 @@ open class SearchAndSelectNode: ASDisplayNode, ASTableDataSource, ASTableDelegat
 	public var delegate: SearchAndSelectDelegate?
 	public var state: SearchState = .closed
 	
-	public let textField = ASEditableTextNode()
+	public let textField = IconTextNode()
 	public let tableNode = ASTableNode()
 	
 	override public init() {
@@ -37,11 +37,19 @@ open class SearchAndSelectNode: ASDisplayNode, ASTableDataSource, ASTableDelegat
 		tableNode.delegate = self
 		tableNode.dataSource = self
 		
-		textField.attributedPlaceholderText = NSAttributedString(string: "Search")
-		textField.delegate = self
+		textField.textNode.delegate = self
 	}
 	
 	open func editableTextNodeDidUpdateText(_ editableTextNode: ASEditableTextNode) {
+		(editableTextNode.attributedText?.string.characters.count).flatMap{
+			if $0 > 3 {
+				textField.searchTextState = .searching
+			} else if $0 > 0 {
+				textField.searchTextState = .open
+			} else {
+				textField.searchTextState = .closed
+			}
+		}
 		delegate?.searchTextDidUpdate(withText: editableTextNode.textView.text)
 	}
 	
@@ -67,7 +75,8 @@ open class SearchAndSelectNode: ASDisplayNode, ASTableDataSource, ASTableDelegat
 	override open func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		switch state {
 		case .closed:
-			return ASInsetLayoutSpec(insets: UIEdgeInsetsMake(18, 9, 18, 9), child: textField)
+			let stack = ASStackLayoutSpec(direction: .vertical, spacing: 9.0, justifyContent: .start, alignItems: .stretch, children: [textField])
+			return ASInsetLayoutSpec(insets: UIEdgeInsetsMake(18, 9, 18, 9), child: stack)
 		case .open:
 			tableNode.style.flexGrow = 1.0
 			textField.style.flexShrink = 1.0

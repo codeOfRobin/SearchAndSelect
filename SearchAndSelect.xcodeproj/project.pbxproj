@@ -27,6 +27,7 @@
 		4285F5811E07BD0A00286D7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 422BC58A1E04999D00001677 /* Assets.xcassets */; };
 		4285F5831E07C3FC00286D7D /* IconTextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285F5821E07C3FC00286D7D /* IconTextNode.swift */; };
 		4285F5851E07D44400286D7D /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285F5841E07D44400286D7D /* TextViewController.swift */; };
+		4285F5871E07F61300286D7D /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285F5861E07F61300286D7D /* Styles.swift */; };
 		52D6D9871BEFF229002C0205 /* SearchAndSelect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* SearchAndSelect.framework */; };
 		52D6D9981BEFF375002C0205 /* SearchAndSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D6D9961BEFF375002C0205 /* SearchAndSelect.swift */; };
 		52D6D99B1BEFF375002C0205 /* SearchAndSelectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D6D9971BEFF375002C0205 /* SearchAndSelectTests.swift */; };
@@ -99,6 +100,7 @@
 		422BC5A51E04999D00001677 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4285F5821E07C3FC00286D7D /* IconTextNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconTextNode.swift; sourceTree = "<group>"; };
 		4285F5841E07D44400286D7D /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		4285F5861E07F61300286D7D /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		52D6D97C1BEFF229002C0205 /* SearchAndSelect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SearchAndSelect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D6D9861BEFF229002C0205 /* SearchAndSelect-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SearchAndSelect-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D6D9961BEFF375002C0205 /* SearchAndSelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchAndSelect.swift; path = Sources/SearchAndSelect.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				52D6D9961BEFF375002C0205 /* SearchAndSelect.swift */,
+				4285F5861E07F61300286D7D /* Styles.swift */,
 				4285F5821E07C3FC00286D7D /* IconTextNode.swift */,
 			);
 			name = Sources;
@@ -489,6 +492,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52D6D9981BEFF375002C0205 /* SearchAndSelect.swift in Sources */,
+				4285F5871E07F61300286D7D /* Styles.swift in Sources */,
 				4285F5831E07C3FC00286D7D /* IconTextNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -769,7 +773,7 @@
 				);
 				INFOPLIST_FILE = Configs/SearchAndSelect.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SearchAndSelect.SearchAndSelect-iOS";
@@ -796,7 +800,7 @@
 				);
 				INFOPLIST_FILE = Configs/SearchAndSelect.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.SearchAndSelect.SearchAndSelect-iOS";
 				PRODUCT_NAME = SearchAndSelect;
