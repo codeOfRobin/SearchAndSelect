@@ -23,16 +23,6 @@ class TextViewController: UIViewController {
 			return ASStackLayoutSpec(direction: .vertical, spacing: 0.0, justifyContent: .center, alignItems: .stretch, children: [searchText])
 		}
 		
-//		let first = DispatchTime.now() + .seconds(3)
-//		let second = DispatchTime.now() + .seconds(10)
-//		
-//		DispatchQueue.main.asyncAfter(deadline: first) { 
-//			searchText.searchTextState = .open
-//		}
-//		
-//		DispatchQueue.main.asyncAfter(deadline: second) {
-//			searchText.searchTextState = .searching
-//		}
         // Do any additional setup after loading the view.
     }
 
