@@ -20,7 +20,7 @@ open class TagsContainerNode: ASCellNode, ASCollectionDataSource, ASCollectionDe
 		flowlayout.minimumInteritemSpacing = 0;
 		flowlayout.minimumLineSpacing = 0
 //		 Shouldn't this be done automatically?  as per documentation ? remove this and it does not show cells.
-		flowlayout.itemSize = CGSize.init(width: 100, height: 100)
+//		flowlayout.itemSize = CGSize.init(width: 100, height: 100)
 		collectionNode = ASCollectionNode(collectionViewLayout: flowlayout)
 		
 		
@@ -47,9 +47,10 @@ open class TagsContainerNode: ASCellNode, ASCollectionDataSource, ASCollectionDe
 	
 	open override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
 		collectionNode.style.height = ASDimensionMake(100)
-		collectionNode.style.height = ASDimensionMake(100)
 		collectionNode.style.flexGrow = 1.0
 		return ASStackLayoutSpec(direction: .horizontal, spacing: 0.0, justifyContent: .center, alignItems: .stretch, children: [collectionNode])
 	}
+	
+	
 }
 
