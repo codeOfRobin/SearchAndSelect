@@ -48,7 +48,7 @@ open class IconTextNode: ASDisplayNode, ASEditableTextNodeDelegate {
 		super.init()
 		
 		self.automaticallyManagesSubnodes = true
-		icon.image = #imageLiteral(resourceName: "search")
+		icon.image = UIImage(named: "search")
 		addSubnode(icon)
 		addSubnode(textNode)
 		addSubnode(topSeparator)
