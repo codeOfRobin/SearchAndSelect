@@ -34,7 +34,7 @@ class MultipleSelectViewController: UIViewController, ASTableDataSource, ASTable
 		self.view.addSubnode(tableNode)
 		tableNode.delegate = self
 		tableNode.dataSource = self
-		self.edgesForExtendedLayout = [.left, .right, .bottom]
+//		self.edgesForExtendedLayout = [.left, .right, .bottom]
 		
 		
 		
